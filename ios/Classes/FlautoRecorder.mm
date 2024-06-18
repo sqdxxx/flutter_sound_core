@@ -356,9 +356,11 @@ AudioRecInterface* audioRec;
 - (void)updateRecorderProgress:(NSTimer*) atimer
 {
         assert (recorderTimer == atimer);
-        NSNumber* duration = audioRec ->recorderProgress();
-        NSNumber * normalizedPeakLevel = audioRec ->dbPeakProgress();
-        [m_callBack updateRecorderProgressDbPeakLevel: normalizedPeakLevel duration: duration];
+        if (audioRec != nil) {
+                NSNumber* duration = audioRec ->recorderProgress();
+                NSNumber * normalizedPeakLevel = audioRec ->dbPeakProgress();
+                [m_callBack updateRecorderProgressDbPeakLevel: normalizedPeakLevel duration: duration];
+        }
 }
  
 - (int)getStatus
